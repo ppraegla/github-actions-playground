@@ -8,6 +8,7 @@ jobs:
         outputs:
             my-output-from-job: ${{ steps.my-action.outputs.my-output.value }}
         steps:
+            - uses: actions/checkout@v4
             - id: my-action
               uses: ./.github/actions/my-action
               with:
