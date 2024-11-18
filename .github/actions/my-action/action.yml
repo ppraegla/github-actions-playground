@@ -1,0 +1,19 @@
+name: my action
+description: Set some variable as output
+inputs:
+  my-input:
+    description: 'Some input'
+    required: true
+outputs:
+  my-output:
+    description: 'The output'
+    value: ${{ steps.my-step.outputs.dependencies_hash }}
+runs:
+  using: composite
+  steps:
+    - id: my-step
+      name: Step to write output
+      run: |
+        echo ${{ inputs.my-input }}
+        echo "my-output='output from my action.'" >> $GITHUB_OUTPUT
+      shell: bash

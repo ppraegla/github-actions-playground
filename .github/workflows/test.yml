@@ -1,0 +1,23 @@
+name: Test
+
+on: [push,pull_request]
+
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        outputs:
+            my-output-from-job: ${{ steps.my-action.outputs.my-output.value }}
+        steps:
+            - id: my-action
+              uses: ./.github/actions/my-action
+              with:
+                my-input: 'Input from job1'
+            - name: use output from the custom action
+              run: echo ${{ steps.my-action.outputs.my-output.value }}
+
+    job2:
+        runs-on: ubuntu-latest
+        needs: job1
+        steps:
+            - run: |
+                echo ${{ needs.job1.outputs.my-output-from-job }}
