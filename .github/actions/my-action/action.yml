@@ -7,7 +7,7 @@ inputs:
 outputs:
   my-output:
     description: 'The output'
-    value: ${{ steps.my-step.outputs.dependencies_hash }}
+    value: ${{ steps.my-step.outputs.my-output }}
 runs:
   using: composite
   steps:
