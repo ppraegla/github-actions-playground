@@ -6,19 +6,19 @@ jobs:
     job1:
         runs-on: ubuntu-latest
         outputs:
-            my-output-from-job: ${{ steps.my-action.outputs.my-output.value }}
+            my_output_from_job: ${{ steps.my-action.outputs.my_output.value }}
         steps:
             - uses: actions/checkout@v4
             - id: my-action
               uses: ./.github/actions/my-action
               with:
-                my-input: 'Input from job1'
+                my_input: 'Input from job1'
             - name: use output from the custom action
-              run: echo ${{ steps.my-action.outputs.my-output.value }}
+              run: echo ${{ steps.my-action.outputs.my_output.value }}
 
     job2:
         runs-on: ubuntu-latest
         needs: job1
         steps:
             - run: |
-                echo ${{ needs.job1.outputs.my-output-from-job }}
+                echo ${{ needs.job1.outputs.my_output_from_job }}
