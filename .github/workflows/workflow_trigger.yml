@@ -1,0 +1,15 @@
+name: test
+
+on:
+  workflow_dispatch:
+    inputs:
+      flag:
+        required: true
+        type: boolean
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello World"
+      - run: if ${{ inputs.flag }}; then echo "success"; else echo "failure"; exit 1; fi
